@@ -25,9 +25,12 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.ranger.plugin.client.BaseClient;
 import org.apache.ranger.plugin.client.HadoopConfigHolder;
 import org.apache.ranger.plugin.client.HadoopException;
+import static org.apache.ranger.plugin.util.PasswordUtils.decryptPassword;
+
 
 import javax.security.auth.Subject;
 import java.io.Closeable;
+import java.io.IOException;
 import java.security.PrivilegedAction;
 import java.sql.Connection;
 import java.sql.Driver;
@@ -80,7 +83,12 @@ public class PrestoClient extends BaseClient implements Closeable {
 
     Properties prestoProperties = new Properties();
     prestoProperties.put(PRESTO_USER_NAME_PROP, prop.getProperty(HadoopConfigHolder.RANGER_LOGIN_USER_NAME_PROP));
-    prestoProperties.put(PRESTO_PASSWORD_PROP, prop.getProperty(HadoopConfigHolder.RANGER_LOGIN_PASSWORD));
+    try {
+        prestoProperties.put(PRESTO_PASSWORD_PROP, decryptPassword(prop.getProperty(HadoopConfigHolder.RANGER_LOGIN_PASSWORD)));
+    } catch (IOException e) {
+        LOG.info("Password decryption failed; trying Presto connection with received password string");
+        prestoProperties.put(PRESTO_PASSWORD_PROP, prop.getProperty(HadoopConfigHolder.RANGER_LOGIN_PASSWORD));
+    }
 
     if (driverClassName != null) {
       try {
