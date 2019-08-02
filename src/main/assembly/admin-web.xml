@@ -453,8 +453,8 @@
               <dependencySets>
                   <dependencySet>
                       <includes>
-                          <include>io.prestosql:presto-spi:jar:${presto.version}</include>
-                          <include>io.prestosql:presto-jdbc:jar:${presto.version}</include>
+                          <include>com.facebook.presto:presto-spi:jar:${presto.version}</include>
+                          <include>com.facebook.presto:presto-jdbc:jar:${presto.version}</include>
                       </includes>
                   </dependencySet>
               </dependencySets>

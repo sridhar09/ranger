@@ -36,11 +36,14 @@
             <artifactId>ranger-plugins-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.facebook.presto/presto-spi -->
         <dependency>
-            <groupId>io.prestosql</groupId>
+            <groupId>com.facebook.presto</groupId>
             <artifactId>presto-spi</artifactId>
-            <version>${presto.version}</version>
+            <version>0.222</version>
+            <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.apache.ranger</groupId>
             <artifactId>ranger-plugin-classloader</artifactId>

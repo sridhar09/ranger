@@ -13,12 +13,11 @@
  */
 package org.apache.ranger.authorization.presto.authorizer;
 
-import io.prestosql.spi.connector.CatalogSchemaName;
-import io.prestosql.spi.connector.CatalogSchemaTableName;
-import io.prestosql.spi.connector.SchemaTableName;
-import io.prestosql.spi.security.AccessDeniedException;
-import io.prestosql.spi.security.Identity;
-import io.prestosql.spi.security.SystemAccessControl;
+
+import com.facebook.presto.spi.*;
+import com.facebook.presto.spi.security.AccessDeniedException;
+import com.facebook.presto.spi.security.Identity;
+import com.facebook.presto.spi.security.SystemAccessControl;
 import org.apache.ranger.plugin.classloader.RangerPluginClassLoader;
 
 import javax.inject.Inject;

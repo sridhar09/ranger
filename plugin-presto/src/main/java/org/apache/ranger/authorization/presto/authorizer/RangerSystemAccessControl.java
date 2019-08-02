@@ -18,14 +18,12 @@
  */
 package org.apache.ranger.authorization.presto.authorizer;
 
-import io.prestosql.spi.connector.CatalogSchemaName;
-import io.prestosql.spi.connector.CatalogSchemaTableName;
-import io.prestosql.spi.connector.SchemaTableName;
-import io.prestosql.spi.security.AccessDeniedException;
-import io.prestosql.spi.security.Identity;
-import io.prestosql.spi.security.PrestoPrincipal;
-import io.prestosql.spi.security.Privilege;
-import io.prestosql.spi.security.SystemAccessControl;
+import com.facebook.presto.spi.*;
+import com.facebook.presto.spi.security.AccessDeniedException;
+import com.facebook.presto.spi.security.Identity;
+import com.facebook.presto.spi.security.PrestoPrincipal;
+import com.facebook.presto.spi.security.Privilege;
+import com.facebook.presto.spi.security.SystemAccessControl;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.security.UserGroupInformation;
@@ -328,7 +326,6 @@ public class RangerSystemAccessControl
     }
   }
 
-  @Override
   public void checkCanShowRoles(Identity identity, String catalogName) {
     if (!checkPermission(createResource(catalogName), identity, PrestoAccessType.ADMIN)) {
       LOG.info("==> RangerSystemAccessControl.checkCanShowRoles(" + catalogName + ") denied");
